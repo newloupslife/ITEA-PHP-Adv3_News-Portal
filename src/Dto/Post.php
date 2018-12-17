@@ -12,11 +12,13 @@ final class Post
     private $image;
     private $description;
     private $publicationDate;
+    private $category;
 
-    public function __construct(string $description, \DateTimeInterface $publicationDate)
+    public function __construct(string $description, \DateTimeInterface $publicationDate, Category $category)
     {
         $this->description = $description;
         $this->publicationDate = $publicationDate;
+        $this->category = $category;
     }
 
     public function setImage(string $src): void
@@ -37,5 +39,10 @@ final class Post
     public function getPublicationDate(): string
     {
         return $this->publicationDate->format('d-m-Y');
+    }
+
+    public function getCategory(): Category
+    {
+        return $this->category;
     }
 }

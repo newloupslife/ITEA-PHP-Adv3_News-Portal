@@ -3,6 +3,21 @@ html {
     min-height: 100%;
 }
 
+header ul.categories {
+    padding: 0;
+    padding: 20px 0;
+
+    background-color: #eee;
+
+    list-style: none;
+    text-align: center;
+}
+
+header ul.categories > li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
 body {
     margin-bottom: 60px; /* Margin bottom by footer height */
 }

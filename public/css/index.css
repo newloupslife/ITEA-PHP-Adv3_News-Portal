@@ -1,18 +1,3 @@
-header ul.categories {
-    padding: 0;
-    padding: 20px 0;
-
-    background-color: #eee;
-    
-    list-style: none;
-    text-align: center;
-}
-
-header ul.categories > li {
-    display: inline-block;
-    margin: 0 10px;
-}
-
 main.index {
     margin-top: 20px;
 }

@@ -11,9 +11,23 @@ use App\Post\PostsCollection;
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
  */
-final class FakeHomePageService implements HomePageServiceInterface
+final class FakeHomeService implements HomePageServiceInterface
 {
     private const POSTS_COUNT = 4;
+    private const CATEGORIES = [
+        'it' => [
+            'name' => 'IT',
+        ],
+        'world' => [
+            'name' => 'World',
+        ],
+        'science' => [
+            'name' => 'science',
+        ],
+        'sport' => [
+            'name' => 'Sport',
+        ],
+    ];
 
     /**
      * {@inheritdoc}
@@ -23,11 +37,13 @@ final class FakeHomePageService implements HomePageServiceInterface
         $faker = \Faker\Factory::create();
         $collection = new PostsCollection();
 
+        $category = \array_rand(self::CATEGORIES, 1);
+
         for ($i = 0; $i < self::POSTS_COUNT; $i++) {
             $dto = new Post(
                 $faker->text,
                 $faker->dateTime,
-                new Category('IT', '')
+                new Category($category['name'], $faker->sentence)
             );
 
             $dto->setImage($faker->imageUrl());

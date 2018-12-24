@@ -3,20 +3,26 @@
 namespace App\Service\Home;
 
 use App\Category\CategoriesCollection;
-use App\Dto\Post;
-use App\Dto\Category as CategoryDto;
-use App\Entity\Category;
+use App\Post\PostMapper;
 use App\Post\PostsCollection;
 use App\Repository\Category\CategoryRepositoryInterface;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\Post\PostRepositoryInterface;
 
+/**
+ * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
+ */
 final class HomePageService implements HomePageServiceInterface
 {
     private $categoryRepository;
+    private $postRepository;
 
-    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    public function __construct(
+        CategoryRepositoryInterface $categoryRepository,
+        PostRepositoryInterface $postRepository
+    )
     {
         $this->categoryRepository = $categoryRepository;
+        $this->postRepository = $postRepository;
     }
 
     /**
@@ -24,8 +30,19 @@ final class HomePageService implements HomePageServiceInterface
      */
     public function getPosts(): PostsCollection
     {
-        return new PostsCollection(new Post('', new \DateTime(), new CategoryDto('', '')));
+        $posts = $this->postRepository->findAllWithCategories();
+        $collection = new PostsCollection();
+        $dataMapper = new PostMapper();
+
+        foreach ($posts as $post) {
+            $collection->addPost($dataMapper->entityToDto($post));
+        }
+
+        return $collection;
     }
+    /**
+     * {@inheritdoc}
+     */
 
     public function getCategories(): CategoriesCollection
     {

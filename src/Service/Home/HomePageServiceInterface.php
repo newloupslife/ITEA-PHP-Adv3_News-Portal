@@ -20,5 +20,10 @@ interface HomePageServiceInterface
      */
     public function getPosts(): PostsCollection;
 
+    /**
+     * Gets collection of categories for home page.
+     *
+     * @return CategoriesCollection
+     */
     public function getCategories(): CategoriesCollection;
 }

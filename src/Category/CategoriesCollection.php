@@ -2,8 +2,11 @@
 
 namespace App\Category;
 
-use Traversable;
-
+/**
+ * Immutable collection of Category entities.
+ *
+ * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
+ */
 final class CategoriesCollection implements \IteratorAggregate
 {
     private $categories;

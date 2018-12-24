@@ -39,6 +39,9 @@ final class FakeHomePageService implements HomePageServiceInterface
         return $collection;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getCategories(): CategoriesCollection
     {
         return new CategoriesCollection([]);

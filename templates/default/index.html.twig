@@ -1,5 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block categories %}
+    <ul class="categories">
+    {% for category in categories %}
+        <li>
+            <a href="{{ path('category_view', {slug: category.slug}) }}">{{ category.name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+
 {% block body %}
 <main class="index" role="main">
     {% set mainPost = posts.shift %}

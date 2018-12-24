@@ -38,4 +38,4 @@ services:
 
     # Aliases
 
-    App\Service\Home\HomePageServiceInterface: '@App\Service\Home\FakeHomePageService'
+    App\Service\Home\HomePageServiceInterface: '@App\Service\Home\HomePageService'

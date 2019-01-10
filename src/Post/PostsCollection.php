@@ -9,7 +9,7 @@ use App\Dto\Post;
  *
  * @author Vladimir Kuprienko <vldmr.kuprienko@gmail.com>
  */
-final class PostsCollection implements \IteratorAggregate
+final class PostsCollection implements \IteratorAggregate, \Countable
 {
     private $posts;
 
@@ -34,5 +34,10 @@ final class PostsCollection implements \IteratorAggregate
     public function getIterator(): iterable
     {
         return new \ArrayIterator($this->posts);
+    }
+
+    public function count()
+    {
+        return \count($this->posts);
     }
 }

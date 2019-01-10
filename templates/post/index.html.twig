@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <h1>{{ post.title }}</h1>
+    <small>{{ post.category.name }}</small>
+    <div>{{ post.body }}</div>
+    <a href="{{ path('post_like', {id: post.id}) }}" id="js-post-like-btn">Like</a>
+    <a href="#" id="js-post-dislike-btn">Dislike</a>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/post.js') }}"></script>
+{% endblock %}

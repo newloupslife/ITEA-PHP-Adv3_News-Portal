@@ -28,10 +28,12 @@ final class DefaultController extends AbstractController
     {
         $posts = $service->getPosts();
         $categories = $service->getCategories();
+        $partnerPosts = $service->getPartnersPosts();
 
         return $this->render('default/index.html.twig', [
             'posts' => $posts,
             'categories' => $categories,
+            'partner_posts' => $partnerPosts,
         ]);
     }
 

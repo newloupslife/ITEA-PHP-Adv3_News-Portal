@@ -5,6 +5,7 @@ namespace App\Service\Home;
 use App\Category\CategoriesCollection;
 use App\Dto\Category;
 use App\Dto\Post;
+use App\Post\PartnerPostsCollection;
 use App\Post\PostsCollection;
 
 /**
@@ -45,5 +46,10 @@ final class FakeHomePageService implements HomePageServiceInterface
     public function getCategories(): CategoriesCollection
     {
         return new CategoriesCollection([]);
+    }
+
+    public function getPartnersPosts(): PartnerPostsCollection
+    {
+        // TODO: Implement getPartnersPosts() method.
     }
 }

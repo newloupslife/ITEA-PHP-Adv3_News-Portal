@@ -3,6 +3,7 @@
 namespace App\Service\Home;
 
 use App\Controller\CategoryController;
+use App\Post\PartnerPostsCollection;
 use App\Post\PostsCollection;
 use App\Category\CategoriesCollection;
 
@@ -26,4 +27,6 @@ interface HomePageServiceInterface
      * @return CategoriesCollection
      */
     public function getCategories(): CategoriesCollection;
+
+    public function getPartnersPosts(): PartnerPostsCollection;
 }

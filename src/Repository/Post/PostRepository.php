@@ -5,6 +5,7 @@ namespace App\Repository\Post;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @method Post|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,9 +15,15 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class PostRepository extends ServiceEntityRepository implements PostRepositoryInterface
 {
-    public function __construct(RegistryInterface $registry)
+    /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(RegistryInterface $registry, Security $security)
     {
         parent::__construct($registry, Post::class);
+        $this->security = $security;
     }
 
     /**
@@ -26,10 +33,15 @@ class PostRepository extends ServiceEntityRepository implements PostRepositoryIn
      */
     public function findAllWithCategories()
     {
-        return $this->createQueryBuilder('p')
+        $qb = $this->createQueryBuilder('p')
             ->innerJoin('p.category', 'c')
-            ->addSelect('c')
-            ->getQuery()
+            ->addSelect('c');
+
+        if (!$this->security->isGranted('ROLE_USER')) {
+            $qb->andWhere("c.slug != 'science'");
+        }
+
+        return $qb->getQuery()
             ->getResult()
         ;
     }

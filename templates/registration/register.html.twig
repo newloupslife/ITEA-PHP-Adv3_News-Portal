@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {{ form_start(registrationForm, {
+        attr: {
+            class: 'form-signin'
+        }
+    }) }}
+        <h1 class="h3 mb-3 font-weight-normal">Signup</h1>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        {{ form_errors(registrationForm.email) }}
+        {{ form_row(registrationForm.email, {
+            attr: {
+                class: 'form-control',
+                placeholder: 'Email address',
+                autofocus: ''
+            }
+        }) }}
+        {{ form_errors(registrationForm.plainPassword) }}
+        <label for="inputPassword" class="sr-only">Password</label>
+        {{ form_widget(registrationForm.plainPassword, {
+            attr: {
+                class: 'form-control',
+                placeholder: 'Password',
+            }
+        }) }}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+        <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+    {{ form_end(registrationForm) }}
+{% endblock %}

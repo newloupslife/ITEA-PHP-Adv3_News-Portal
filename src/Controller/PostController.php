@@ -13,6 +13,10 @@ class PostController extends AbstractController
      */
     public function index(Post $post)
     {
+        if ($post->getCategory()->getSlug() === 'science') {
+            $this->denyAccessUnlessGranted('ROLE_USER');
+        }
+
         return $this->render('post/index.html.twig', [
             'post' => $post,
         ]);

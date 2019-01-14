@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Exception\EntityNotFoundException;
 use App\Service\Category\CategoryPageServiceInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -24,6 +25,10 @@ final class CategoryController extends AbstractController
      */
     public function view(string $slug, CategoryPageServiceInterface $service): Response
     {
+        if ('science' === $slug) {
+            $this->denyAccessUnlessGranted('ROLE_USER');
+        }
+
         try {
             $category = $service->getCategoryBySlug($slug);
         } catch (EntityNotFoundException $e) {
